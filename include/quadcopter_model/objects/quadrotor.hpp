@@ -43,6 +43,7 @@ class Quadrotor : ObjectBase {
   // public set functions
   bool setState(const QuadState& state);
   bool setCommand(const Command& cmd);
+  bool setIntegratorDt(double dt);
   bool updateDynamics(const QuadrotorDynamics& dynamics);
 
   // low-level controller
@@ -67,6 +68,7 @@ class Quadrotor : ObjectBase {
   QuadrotorDynamics dynamics_;
   IMU imu_;
   std::unique_ptr<IntegratorRK4> integrator_ptr_;
+  double integrator_dt_ = 2.5e-3;
 
   // quad control command
   Command cmd_;

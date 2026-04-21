@@ -19,8 +19,8 @@ set_target_properties(quadcopter_model PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 target_compile_features(quadcopter_model PUBLIC cxx_std_17)
 target_include_directories(quadcopter_model PUBLIC
-    PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
 )
 
 

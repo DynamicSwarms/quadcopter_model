@@ -150,6 +150,13 @@ bool Quadrotor::setCommand(const Command &cmd) {
   return true;
 }
 
+bool Quadrotor::setIntegratorDt(double dt) {
+  if (dt <= 0.0) return false;
+  integrator_dt_ = dt;
+  integrator_ptr_ = std::make_unique<IntegratorRK4>(dynamics_.getDynamicsFunction(), integrator_dt_);
+  return true;
+}
+
 bool Quadrotor::setState(const QuadState &state) {
   if (!state.valid()) return false;
   state_ = state;
@@ -240,7 +247,7 @@ bool Quadrotor::updateDynamics(const QuadrotorDynamics &dynamics) {
   }
   dynamics_ = dynamics;
   integrator_ptr_ =
-    std::make_unique<IntegratorRK4>(dynamics_.getDynamicsFunction(), 2.5e-3);
+    std::make_unique<IntegratorRK4>(dynamics_.getDynamicsFunction(), integrator_dt_);
 
   B_allocation_ = dynamics_.getAllocationMatrix();
   B_allocation_inv_ = B_allocation_.inverse();
