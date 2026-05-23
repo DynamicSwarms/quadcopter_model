@@ -32,9 +32,10 @@ void QuadState::setZero() {
 }
 
 std::ostream& operator<<(std::ostream& os, const QuadState& state) {
+  std::streamsize prev_precision = os.precision();
   os.precision(3);
   os << "State at " << state.t << "s: [" << state.x.transpose() << "]";
-  os.precision();
+  os.precision(prev_precision);
   return os;
 }
 

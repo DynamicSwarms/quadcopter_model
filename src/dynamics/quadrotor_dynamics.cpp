@@ -196,6 +196,7 @@ bool QuadrotorDynamics::updateInertiaMarix() {
 }
 
 std::ostream& operator<<(std::ostream& os, const QuadrotorDynamics& quad) {
+  std::streamsize prev_precision = os.precision();
   os.precision(3);
   os << "Quadrotor Dynamics:\n"
      << "mass =             [" << quad.mass_ << "]\n"
@@ -215,7 +216,7 @@ std::ostream& operator<<(std::ostream& os, const QuadrotorDynamics& quad) {
      << "thrust_max =       [" << quad.thrust_max_ << "]\n"
      << "omega_max =        [" << quad.omega_max_.transpose() << "]"
      << std::endl;
-  os.precision();
+  os.precision(prev_precision);
   return os;
 }
 
