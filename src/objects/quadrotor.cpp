@@ -76,7 +76,7 @@ bool Quadrotor::run(const Scalar ctl_dt) {
 
   // The following two lines are from vinzenzm so maybe wrong :=
   state_.ba = state_.R().transpose() * (state_.a - gz_);   
-  state_.bw = state_.R().transpose() * state_.w; 
+  state_.bw = state_.w; //state_.R().transpose() * state_.w; 
   return true;
 }
 
